@@ -1,0 +1,67 @@
+class Television:
+    min_volume = 0
+    max_volume = 2
+    min_channel = 0
+    max_channel = 3
+    '''
+initialize function
+    '''
+    def __init__(self):
+        self.status = False
+        self.muted = False
+        self.volume = Television.min_volume  
+        self.channel = Television.min_channel
+
+    '''
+sets power
+    '''
+    def power(self):
+        self.status = True
+    '''
+mutes channel
+    '''
+
+    def mute(self):
+        self.muted = True
+    '''
+channel goes up
+    '''
+
+    def channel_up(self):
+        if self.channel == Television.max_channel:  
+            self.channel = Television.min_channel
+        else:
+            self.channel += 1
+    '''
+channel goes down
+    '''
+    def channel_down(self):
+        if self.channel == Television.min_channel:
+            self.channel = Television.max_channel
+        else:
+            self.channel -= 1
+    '''
+volume goes up
+    '''
+
+    def volume_up(self):
+        self.muted = False
+        if self.volume == Television.max_volume:
+            self.volume = Television.min_volume
+        else:
+            self.volume += 1
+    '''
+volume goes down    
+    '''
+
+    def volume_down(self):
+        self.muted = False
+        if self.volume == Television.min_volume:
+            self.volume = Television.max_volume
+        else:
+            self.volume -= 1
+    '''
+formats strings to Power = Channel = Volume =
+    '''
+    def __str__(self):
+        return f'Power = {self.status}, Channel = {self.channel}, Volume = {self.volume}'
