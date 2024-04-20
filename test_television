@@ -13,6 +13,8 @@ def test_channel_down():
     tv.channel_down()
     assert tv.channel == 2
 
+
+
 def test_channel_up():
     tv = Television()
     tv.channel_up()
@@ -22,12 +24,14 @@ def test_channel_up():
 def test_volume_up():
     tv = Television()
     tv.volume_up()
+    assert tv.muted == False
     assert tv.volume == 1
 
 def test_volume_down():
     tv = Television()
     tv.volume = 2
     tv.volume_down()
+    assert tv.muted == False
     assert tv.volume == 1
 
 def test_str():
@@ -44,14 +48,17 @@ def test_vol_switch():
     tv.volume = 0
     tv.volume_down()
     assert tv.volume == tv.max_volume
+    tv2 = Television()
+    tv2.volume = 2
+    tv2.volume_up()
+    assert tv2.volume == tv2.min_volume
     
 def test_mute_switch():
     tv = Television()
     tv.volume_down()
+    assert tv.muted == False
     tv.volume_up()
     assert tv.muted == False
-
-
 
 
 if __name__ == "__main__":
