@@ -73,7 +73,7 @@ class Television:
             self.__muted = False
             if self.__volume < Television.max_volume:
                 self.__volume += 1
-        previous_volume = self.__volume
+        
 
         return self.__volume
 
@@ -86,7 +86,7 @@ class Television:
             self.__muted = False
             if self.__volume > Television.min_volume:
                 self.__volume -= 1
-        previous_volume = self.__volume
+        
         return self.__volume
 
 
