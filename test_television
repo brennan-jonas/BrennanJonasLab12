@@ -5,18 +5,15 @@ from television import Television
 def test_init():
     tv = Television()
 
-    assert tv._Television__status == False
-    assert tv._Television__muted == False
-    assert tv._Television__volume == Television.min_volume
-    assert tv._Television__channel == Television.min_channel
+    assert str(tv) == 'Power = False, Channel = 0, Volume = 0'
 
 
 def test_power():
     tv = Television()
     tv.power()
-    assert tv._Television__status == True
+    assert str(tv) == 'Power = True, Channel = 0, Volume = 0'
     tv2 = Television()
-    assert tv2._Television__status == False
+    assert str(tv2) == 'Power = False, Channel = 0, Volume = 0'
 
 
 def test_mute():
@@ -24,106 +21,101 @@ def test_mute():
     tv.power()
     tv.volume_up()
     tv.mute()
-    assert tv._Television__muted == True
+    assert str(tv) == 'Power = True, Channel = 0, Volume = 0'
 
     tv2 = Television()
     tv2.power()
     tv2.mute()
     tv2.mute()
-    assert tv2._Television__muted == False
+    assert str(tv) == 'Power = True, Channel = 0, Volume = 0'
 
     tv3 = Television()
     tv3.mute()
-    assert tv3._Television__muted == False
+    assert str(tv3) == 'Power = False, Channel = 0, Volume = 0'
 
     tv4 = Television()
     tv4.mute()
     tv4.mute()
-    assert tv4._Television__muted == False
+    assert str(tv4) == 'Power = False, Channel = 0, Volume = 0'
 
 def test_channel_up():
     tv = Television()
     tv.channel_up()
-    assert tv._Television__channel == Television.min_channel
+    assert str(tv) == 'Power = False, Channel = 0, Volume = 0'
 
     tv2 = Television()
     tv2.power()
     tv2.channel_up()
-    assert tv2._Television__channel == 1
+    assert str(tv2) == 'Power = True, Channel = 1, Volume = 0'
 
     tv3= Television()
     tv3.power()
     tv3._Television__channel = Television.max_channel
     tv3.channel_up()
-    assert tv3._Television__channel == Television.min_channel
+    assert str(tv3) == 'Power = True, Channel = 0, Volume = 0'
 
 def test_channel_down():
     tv = Television()
     tv.channel_down()
-    assert tv._Television__channel == Television.min_volume
+    assert str(tv) == 'Power = False, Channel = 0, Volume = 0'
 
     tv2= Television()
     tv2.power()
     tv2._Television__channel = Television.min_channel
     tv2.channel_down()
-    assert tv2._Television__channel == Television.max_channel
+    assert str(tv2) == 'Power = True, Channel = 3, Volume = 0'
 
 
 def test_volume_up():
     tv = Television()
     tv.volume_up()
-    assert tv._Television__volume == Television.min_volume
+    assert str(tv) == 'Power = False, Channel = 0, Volume = 0'
 
     tv2 = Television()
     tv2.power()
     tv2.volume_up()
-    assert tv2._Television__volume == 1
+    assert str(tv2) == 'Power = True, Channel = 0, Volume = 1'
 
     tv3 = Television()
     tv3.power()
     tv3.mute()
     tv3.volume_up()
-    assert tv3._Television__volume == 1
-    assert tv3._Television__muted == False
+    assert str(tv3) == 'Power = True, Channel = 0, Volume = 1'
 
     tv4 = Television()
     tv4.power()
     tv4._Television__volume = Television.max_volume
     tv4.volume_up()
-    assert tv4._Television__volume == Television.max_volume
+    assert str(tv4) == 'Power = True, Channel = 0, Volume = 2'
 
 def test_volume_down():
     tv = Television()
     tv.volume_down()
-    assert tv._Television__volume == Television.min_volume
+    assert str(tv) == 'Power = False, Channel = 0, Volume = 0'
 
     tv2 = Television()
     tv2.power()
     tv2.volume_up()
     tv2.volume_up()
     tv2.volume_down()
-
-    assert tv2._Television__volume == 1
+    assert str(tv2) == 'Power = True, Channel = 0, Volume = 1'
 
     tv3 = Television()
     tv3.power()
     tv3.mute()
     tv3.volume_down()
-    assert tv3._Television__volume == Television.min_volume
-    assert tv3._Television__muted == False
+    assert str(tv3) == 'Power = True, Channel = 0, Volume = 0'
 
     tv4 = Television()
     tv4.power()
     tv4._Television__volume == Television.min_volume
     tv4.volume_down()
-    assert tv4._Television__volume == Television.min_volume
+    assert str(tv4) == 'Power = True, Channel = 0, Volume = 0'
 
 
 def test_str():
     tv = Television()
     assert str(tv) == 'Power = False, Channel = 0, Volume = 0'
-
-
 
 if __name__ == "__main__":
     pytest.main()
